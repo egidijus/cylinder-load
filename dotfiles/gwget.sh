@@ -1,3 +1,11 @@
+
+# Use gwget like wget on github urls, to download the raw file instead of the github html rendered file.
+
+# Example:
+# ```
+# gwget https://github.com/egidijus/py-talk/blob/main/requirements.txt
+# ```
+
 HTTPGET=${HTTPGET:-"wget"}
 
 convert_url() {
@@ -5,8 +13,6 @@ convert_url() {
     sed 's#https://github.com#https://raw.githubusercontent.com#' | \
     sed 's#blob/##'
 }
-
-# $HTTPGET $(convert_url $1)
 
 gwget() {
   $HTTPGET $(convert_url $1)
